@@ -28,14 +28,20 @@ jobs:
       - name: Generar documentación con JSDoc
         run: npm run docs
 
-      # Paso 5: Subir documentación a la rama `wiki`
+      # Paso 5: Configurar identidad de Git
+      - name: Configurar identidad de Git
+        run: |
+          git config --global user.email "tu-email@example.com"
+          git config --global user.name "Tu Nombre"
+
+      # Paso 6: Subir documentación a la rama `wiki`
       - name: Subir documentación a la rama `wiki`
         run: |
-          # Crear la rama wiki (o actualizarla si ya existe)
           git checkout --orphan wiki  # Crea una rama sin historial
           git rm -rf .  # Elimina archivos existentes
           cp -r docs/* .  # Copia los archivos generados en la carpeta docs
           git add .  # Agregar los archivos generados
           git commit -m "Actualizar documentación"  # Commit de los cambios
           git push origin wiki --force  # Subir a la rama `wiki`
+
 
