@@ -1,8 +1,10 @@
 {
     "source": {
-      "include": ["src"],
-      "includePattern": ".js$"
-    },
+  "include": ["src"],
+  "includePattern": ".js$",
+  "exclude": ["src/tests/*"]
+}
+,
     "opts": {
       "destination": "docs"
     }
