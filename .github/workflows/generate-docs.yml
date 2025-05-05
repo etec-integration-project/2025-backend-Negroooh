@@ -1,0 +1,30 @@
+name: Generar Documentación
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar el repositorio
+        uses: actions/checkout@v2
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Instalar dependencias
+        run: npm install
+
+      - name: Generar documentación con JSDoc
+        run: npm run docs
+
+      - name: Subir documentación generada
+        uses: actions/upload-artifact@v2
+        with:
+          name: documentacion
+          path: docs
